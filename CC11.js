@@ -40,23 +40,32 @@ function main() {
   // make the bars
   bars
     .append("rect")
+    .attr("width", 0) // Task 5: Start with zero width for 'growth' animation
+    .attr("height", barHeight - 1)
+    .attr("fill", "steelblue")
+    .transition()
+    .duration(1000)
     .attr("width", function (d) {
       return xScale(d);
-    })
-    .attr("height", barHeight - 1)
-    .attr("fill", "steelblue");
-
+    });
   // Task 4: Append text labels inside each bar
   bars
     .append("text")
     .attr("x", function (d) {
       return xScale(d) - 25; // Position text at end of bar
     })
-    .attr("y", barHeight / 2)
+    .attr("y", barHeight / 2 - 1)
     .attr("dy", ".35em")
     .text(function (d) {
-      return d; 
+      return d;
     });
-
+  // Task 5: Implement hover effects for bars
+  bars
+    .on("mouseover", function () {
+      d3.select(this).select("rect").attr("fill", "orange"); // Change color on mouseover
+    })
+    .on("mouseout", function () {
+      d3.select(this).select("rect").attr("fill", "steelblue"); // Revert color on mouseout
+    });
 }
 document.addEventListener("DOMContentLoaded", main);
