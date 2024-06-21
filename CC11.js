@@ -46,5 +46,17 @@ function main() {
     .attr("height", barHeight - 1)
     .attr("fill", "steelblue");
 
+  // Task 4: Append text labels inside each bar
+  bars
+    .append("text")
+    .attr("x", function (d) {
+      return xScale(d) - 25; // Position text at end of bar
+    })
+    .attr("y", barHeight / 2)
+    .attr("dy", ".35em")
+    .text(function (d) {
+      return d; 
+    });
+
 }
 document.addEventListener("DOMContentLoaded", main);
